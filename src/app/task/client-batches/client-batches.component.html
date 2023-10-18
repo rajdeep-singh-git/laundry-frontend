@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Batches of {{data.name}}</h1>
+<div mat-dialog-content style="width: 1200px;" *ngIf="!showEmpty">
+    <div class="mat-elevation-z1">
+        <table mat-table [dataSource]="dataSource" matSort class="table">
+            <ng-container matColumnDef="tagId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>TagId</th>
+                <td mat-cell *matCellDef="let element"><a target="_blank" [href]="'/batch/search/'+element.tagId">{{
+                        element.tagId }}</a></td>
+            </ng-container>
+            <ng-container matColumnDef="cost">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cost</th>
+                <td mat-cell *matCellDef="let element">{{ element.cost }}</td>
+            </ng-container>
+            <ng-container matColumnDef="currentStatus">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let element">{{ element.currentStatus }}</td>
+            </ng-container>
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Due Date</th>
+                <td mat-cell *matCellDef="let element">{{element.dueDate}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="filter.perPage" [length]="totalRecords"
+            [showFirstLastButtons]="true" (page)="onPageChange($event)"></mat-paginator>
+    </div>
+</div>
+<div mat-dialog-content *ngIf="showEmpty">
+    No batch found
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Close</button>
+</div>

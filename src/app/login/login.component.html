@@ -1,0 +1,17 @@
+<form #form="ngForm" (ngSubmit)="login()">
+
+    <h3>Login Form</h3>
+
+    <mat-form-field>
+        <mat-label>Enter Username</mat-label>
+        <input matInput [(ngModel)]="loginForm.username" name="username" required>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Enter Password</mat-label>
+        <input type="password" matInput [(ngModel)]="loginForm.password" name="password" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="form.invalid">Login</button>
+
+    <div>{{error}}</div>
+
+</form>

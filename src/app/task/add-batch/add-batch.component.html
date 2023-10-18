@@ -1,0 +1,69 @@
+<h1 mat-dialog-title>Add batch for {{data.name}}</h1>
+<div mat-dialog-content style="width: 1200px;">
+    <form #form="ngForm" (ngSubmit)="addBatch()">
+        <div class="main-row" *ngFor="let item of controlsArray;let i = index">
+            <mat-form-field class="example-full-width">
+                <mat-label>Choose Item</mat-label>
+                <input type="text" [name]="'item'+i" [formControl]="item.item" matInput [matAutocomplete]="auto">
+                <mat-autocomplete [displayWith]="displayOption" (optionSelected)="chooseSize(item.item,i)"
+                    #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of item.filteredOptions |async" [value]="option">
+                        {{option.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Choose Size</mat-label>
+                <input type="text" [name]="'size'+i" [formControl]="item.size" matInput [matAutocomplete]="size">
+                <mat-autocomplete [displayWith]="displaySize" (optionSelected)="setPrices(item.size.value,i)"
+                    #size="matAutocomplete">
+                    <mat-option *ngFor="let option of item.sizesOptions|async" [value]="option">
+                        {{option.size}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <div class="dry-wash-iron">
+                <mat-form-field>
+                    <mat-label>Wash</mat-label>
+                    <input matInput [(ngModel)]="item.wash" [name]="'wash'+i">
+                </mat-form-field>
+                <mat-checkbox color="primary" class="dry-wash-iron-checkbox" [(ngModel)]="item.isWash"
+                    [name]="'isWash'+i"></mat-checkbox>
+            </div>
+            <div class="dry-wash-iron">
+                <mat-form-field>
+                    <mat-label>Dry</mat-label>
+                    <input matInput [(ngModel)]="item.dry" [name]="'dry'+i">
+                </mat-form-field>
+                <mat-checkbox color="primary" class="dry-wash-iron-checkbox" [(ngModel)]="item.isDry"
+                    [name]="'isDry'+i"></mat-checkbox>
+            </div>
+            <div class="dry-wash-iron">
+                <mat-form-field>
+                    <mat-label>Iron</mat-label>
+                    <input matInput [(ngModel)]="item.iron" [name]="'iron'+i">
+                </mat-form-field>
+                <mat-checkbox color="primary" class="dry-wash-iron-checkbox" [(ngModel)]="item.isIron"
+                    [name]="'isIron'+i"></mat-checkbox>
+            </div>
+            <button type="button" mat-mini-fab color="primary" (click)="addMore()"><mat-icon>add</mat-icon></button>
+            <button type="button" *ngIf="controlsArray.length>1" mat-mini-fab color="warn"
+                (click)="remove(i)"><mat-icon>remove</mat-icon></button>
+
+        </div>
+        <div class="main-row">
+            <mat-form-field>
+                <mat-label>Due Date</mat-label>
+                <input required matInput name="dueDate" [(ngModel)]="dueDate" [min]="minDate" [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+    <button mat-button (click)="form.ngSubmit.emit()">Add Batch</button>
+</div>

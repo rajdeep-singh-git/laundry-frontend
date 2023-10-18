@@ -1,0 +1,21 @@
+#menu {
+    background: #f1f1f1;
+}
+
+#menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#menu ul li {
+    display: block;
+    padding: 8px 10px;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: #333
+}

@@ -1,0 +1,25 @@
+#filter {
+    padding: 15px;
+    display: flex;
+}
+
+#filter form>* {
+    margin-right: 10px;
+}
+
+#info-box {
+    padding: 10px;
+    margin: 15px;
+    box-shadow: 0 0 4px #888;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+#info-box table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#info-box table th {
+    text-align: left;
+}

@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>{{data.id?'Edit':'Add'}} Client</h1>
+<div mat-dialog-content style="width: 500px;">
+    <form #addForm="ngForm" (ngSubmit)="addEditClient()">
+        <div class="form">
+            <mat-form-field class="form-field">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="form.name" name="name" required="">
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-label>Email</mat-label>
+                <input matInput [(ngModel)]="form.email" name="email" required="">
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-label>Phone</mat-label>
+                <input matInput [(ngModel)]="form.phone" name="phone" required="">
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-label>City</mat-label>
+                <input matInput [(ngModel)]="form.city" name="city">
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-label>State</mat-label>
+                <input matInput [(ngModel)]="form.state" name="state">
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+    <button mat-button (click)="addForm.ngSubmit.emit()" [disabled]="addForm.invalid">{{data.id?'Update':'Add'}}
+        Client</button>
+</div>
